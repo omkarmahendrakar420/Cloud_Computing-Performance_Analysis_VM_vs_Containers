@@ -57,6 +57,7 @@ This project delivers an empirical performance comparison between an **Ubuntu Vi
 ## 3. Architecture Overview: VM vs Container
 
 ```mermaid
+```mermaid
 graph TD
     subgraph VM_Architecture["Virtual Machine (VMware)"]
         Hardware1["Physical Host Hardware"] --> HostOS1["Host OS (Windows)"]
@@ -70,6 +71,8 @@ graph TD
         HostKernel --> DockerDaemon["Docker Engine 29.1.3"]
         DockerDaemon --> ContainerApp["Containerized Benchmark Process"]
     end
+
+    VM_Architecture ~~~ Container_Architecture
 ---
 
 ## 4. Prerequisites & Environment Setup
