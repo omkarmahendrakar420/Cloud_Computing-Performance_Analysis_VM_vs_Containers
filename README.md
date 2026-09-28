@@ -57,31 +57,32 @@ This project delivers an empirical performance comparison between an **Ubuntu Vi
 ## 3. Architecture Overview: VM vs Container
 
 ```mermaid
-graph TD
+graph TB
 
     subgraph VM_Architecture["Virtual Machine (VMware)"]
+        Hardware1["Physical Host Hardware"]
+        HostOS1["Host OS (Windows)"]
+        Hypervisor["Hypervisor (VMware Workstation)"]
+        GuestOS["Guest OS Kernel (Ubuntu 24.04)"]
+        App1["Benchmarking Suite (sysbench / fio)"]
 
-        Hardware1["Physical Host Hardware"] --> HostOS1["Host OS (Windows)"]
-
-        HostOS1 --> Hypervisor["Hypervisor (VMware Workstation)"]
-
-        Hypervisor --> GuestOS["Guest OS Kernel (Ubuntu 24.04)"]
-
-        GuestOS --> App1["Benchmarking Suite (sysbench / fio)"]
-
+        Hardware1 --> HostOS1
+        HostOS1 --> Hypervisor
+        Hypervisor --> GuestOS
+        GuestOS --> App1
     end
-
-
 
     subgraph Container_Architecture["Container (Docker)"]
+        Hardware2["Physical Host Hardware / VM Guest"]
+        HostKernel["Ubuntu Host Kernel (Namespaces / cgroups)"]
+        DockerDaemon["Docker Engine 29.1.3"]
+        ContainerApp["Containerized Benchmark Process"]
 
-        Hardware2["Physical Host Hardware / VM Guest"] --> HostKernel["Ubuntu Host Kernel (Namespaces / cgroups)"]
-
-        HostKernel --> DockerDaemon["Docker Engine 29.1.3"]
-
-        DockerDaemon --> ContainerApp["Containerized Benchmark Process"]
-
+        Hardware2 --> HostKernel
+        HostKernel --> DockerDaemon
+        DockerDaemon --> ContainerApp
     end
+```
 ---
 
 ## 4. Prerequisites & Environment Setup
