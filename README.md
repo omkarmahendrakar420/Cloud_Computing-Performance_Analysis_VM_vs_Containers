@@ -19,77 +19,7 @@ A comprehensive experimental performance evaluation comparing **Type-2 Virtual M
 
 ---
 
-## 1. Repository Structure
-
-```text
-Cloud_Computing-Performance_Analysis_VM_vs_Containers/
-├── README.md                                # Master Documentation & Benchmark Report
-│
-├── CPU_Performance_Benchmark/              # Screenshots for CPU Setup, Baseline & 10 Runs
-│   ├── 01_project_root_creation.png
-│   ├── 02_cd_project_root.png
-│   ├── 03_verify_working_directory_pwd.png
-│   ├── 04_create_project_folder_structure.png
-│   ├── 05_collect_system_hardware_info.png
-│   ├── 06_verify_docs_system_info_files.png
-│   ├── 07_check_vm_cpu_cores_nproc.png
-│   ├── 08_check_vm_memory_free.png
-│   ├── 09_check_vm_storage_lsblk.png
-│   ├── 10_check_vm_disk_usage_df1.png
-│   ├── 11_check_vm_disk_usage_df2.png
-│   ├── 12_apt_update.png
-│   ├── 13_install_benchmark_tools.png
-│   ├── 14_verify_installed_tool_versions.png
-│   ├── 15_install_docker_engine.png
-│   ├── 16_enable_docker_service.png
-│   ├── 17_verify_docker_version.png
-│   ├── 18_test_docker_hello_world_sudo.png
-│   ├── 19_configure_docker_user_group.png
-│   ├── 20_create_docker_dir.png
-│   ├── 21_build_benchmark_docker_image.png
-│   ├── 22_docker_image_command_check.png
-│   ├── 23_verify_docker_images_list.png
-│   ├── 24_verify_tools_inside_docker_container.png
-│   ├── 25_verify_project_root.png
-│   ├── 26_vm_cpu_baseline_benchmark_run.png
-│   ├── 27_vm_cpu_baseline_save_verify.png
-│   ├── 28_docker_cpu_baseline_benchmark_run.png
-│   ├── 29_docker_cpu_baseline_save_verify.png
-│   ├── 30_verify_baseline_results_directory.png
-│   ├── 31_create_cpu_result_directories.png
-│   ├── 32_vm_cpu_10_repetitions_execution.png
-│   ├── 33_verify_vm_cpu_10_run_results.png
-│   └── 34_docker_cpu_10_repetitions_execution_and_verify.png
-│
-├── Memory_Performance_Benchmark/           # Screenshots for Memory Benchmark & Monitoring
-│   ├── 01_create_memory_result_directories.png
-│   ├── 02_docker_memory_benchmark_execution.png
-│   ├── 03_docker_memory_10_repetitions_and_verify.png
-│   ├── 04_create_monitoring_directories.png
-│   ├── 05_monitoring_docker_cpu_memory_vmstat_start.png
-│   ├── 06_docker_user_group_refresh.png
-│   ├── 07_monitoring_docker_vmstat_execution_output.png
-│   └── 08_verify_monitoring_docker_results.png
-│
-└── Disk_IO_Performance_Benchmark/          # Screenshots for FIO Storage Workloads (VM vs Docker)
-    ├── 01_create_fio_test_directory.png
-    ├── 02_vm_disk_sequential_write_execution.png
-    ├── 03_create_vm_disk_results_directory.png
-    ├── 04_vm_disk_sequential_write_save_verify.png
-    ├── 05_vm_disk_sequential_read_execution.png
-    ├── 06_vm_disk_sequential_read_save_verify.png
-    ├── 07_vm_disk_random_write_save_verify.png
-    ├── 08_vm_disk_random_read_save_verify.png
-    ├── 09_create_docker_disk_results_directory.png
-    ├── 10_docker_disk_sequential_write_save_verify.png
-    ├── 11_docker_disk_sequential_read_save_verify.png
-    ├── 12_docker_disk_random_write_save_verify.png
-    └── 13_docker_disk_random_read_save_verify.png
-```
-
----
-
-## 2. Project Abstract & Objectives
+## 1. Project Abstract & Objectives
 
 ### Abstract
 Virtualization is a fundamental building block of modern cloud infrastructure. Two predominant paradigms exist:
@@ -107,7 +37,7 @@ This project delivers an empirical performance comparison between an **Ubuntu Vi
 
 ---
 
-## 3. Experimental Environment & Specifications
+## 2. Experimental Environment & Specifications
 
 | Component | Specification |
 | :--- | :--- |
@@ -124,7 +54,7 @@ This project delivers an empirical performance comparison between an **Ubuntu Vi
 
 ---
 
-## 4. Architecture Overview: VM vs Container
+## 3. Architecture Overview: VM vs Container
 
 ```mermaid
 graph TD
@@ -144,9 +74,9 @@ graph TD
 
 ---
 
-## 5. Prerequisites & Environment Setup
+## 4. Prerequisites & Environment Setup
 
-### 5.1 Project Directory Structure & Hardware Logging
+### 4.1 Project Directory Structure & Hardware Logging
 The benchmark workspace was established at `~/vm-vs-container-performance` with isolated subdirectories for documentation, raw metrics, processed CSVs, figures, scripts, and workloads:
 
 ```bash
@@ -176,7 +106,7 @@ uname -a > docs/kernel-info.txt
 
 ---
 
-### 5.2 Tool Installation & Docker Environment Setup
+### 4.2 Tool Installation & Docker Environment Setup
 
 All benchmarking tools were installed natively on the Ubuntu VM:
 ```bash
@@ -202,7 +132,7 @@ docker run --rm hello-world
 
 ---
 
-### 5.3 Building the Benchmark Docker Image
+### 4.3 Building the Benchmark Docker Image
 
 To ensure a fair and controlled comparison, a standardized Docker image `vm-container-benchmark` containing identical versions of `sysbench`, `fio`, `iperf3`, and `python3` was constructed using `docker/Dockerfile`:
 
@@ -230,15 +160,15 @@ docker run --rm -it vm-container-benchmark sysbench --version
 
 ---
 
-## 6. Experiment 1: CPU Performance Benchmark
+## 5. Experiment 1: CPU Performance Benchmark
 
-### 6.1 Objective & Workload Parameters
+### 5.1 Objective & Workload Parameters
 The CPU benchmark measures compute throughput using **prime number calculation** up to 20,000 using `sysbench cpu` across 4 concurrent threads for 30 seconds.
 
 - **Command**: `sysbench cpu --cpu-max-prime=20000 --threads=4 --time=30 run`
 - **Primary Metrics**: Events Per Second (EPS), Total Events, Average Latency (ms), 95th Percentile Latency (ms).
 
-### 6.2 Baseline Benchmarking
+### 5.2 Baseline Benchmarking
 
 #### VM Baseline:
 ```bash
@@ -267,7 +197,7 @@ docker run --rm vm-container-benchmark sysbench cpu --cpu-max-prime=20000 --thre
 
 ---
 
-### 6.3 10 Repeated Benchmark Runs (VM vs Docker)
+### 5.3 10 Repeated Benchmark Runs (VM vs Docker)
 
 To ensure statistical confidence, 10 automated consecutive runs were performed in each environment:
 
@@ -294,16 +224,16 @@ done
 
 ---
 
-## 7. Experiment 2: Memory Performance Benchmark & Resource Monitoring
+## 6. Experiment 2: Memory Performance Benchmark & Resource Monitoring
 
-### 7.1 Objective & Workload Parameters
+### 6.1 Objective & Workload Parameters
 The memory benchmark measures continuous memory read/write throughput using `sysbench memory`.
 
 - **Parameters**: Block size = `1 MiB`, Total data size = `1 GiB`, Threads = `2`.
 - **Command**: `sysbench memory --memory-block-size=1M --memory-total-size=1G --threads=2 run`
 - **Primary Metrics**: Operations Per Second (ops/sec), Transfer Bandwidth (MiB/sec), Latency (min/avg/max).
 
-### 7.2 Memory Execution (VM vs Docker)
+### 6.2 Memory Execution (VM vs Docker)
 
 ```bash
 mkdir -p results/raw/memory/vm results/raw/memory/docker
@@ -322,7 +252,7 @@ done
 * **Docker Measured Memory Throughput**: `1,935.81 MiB/s` (`1,935.81 ops/sec`)
 * **Average Latency**: `0.88 ms`
 
-### 7.3 CPU & Memory Background Monitoring with `vmstat`
+### 6.3 CPU & Memory Background Monitoring with `vmstat`
 
 To monitor system activity under active workloads, `vmstat 1 30` was executed in the background alongside sysbench:
 
@@ -346,9 +276,9 @@ vmstat 1 30 > results/raw/monitoring/docker/vmstat_cpu.txt & docker run --rm vm-
 
 ---
 
-## 8. Experiment 3: Disk I/O Performance Benchmark
+## 7. Experiment 3: Disk I/O Performance Benchmark
 
-### 8.1 Objective & Test Matrix
+### 7.1 Objective & Test Matrix
 Disk I/O performance was evaluated using **`fio` (Flexible I/O Tester)** across 4 distinct storage access patterns on a 2 GiB testfile with **Direct I/O (`--direct=1`)** to bypass OS buffer cache effects:
 
 1. **Sequential Write**: `bs=1M`, `size=2G`, `rw=write`, `runtime=30s`
@@ -358,7 +288,7 @@ Disk I/O performance was evaluated using **`fio` (Flexible I/O Tester)** across 
 
 ---
 
-### 8.2 VM Native Disk I/O Benchmark
+### 7.2 VM Native Disk I/O Benchmark
 
 ```bash
 mkdir -p ~/fio-test results/raw/disk/vm
@@ -392,7 +322,7 @@ fio --name=rand-read --filename=~/fio-test/testfile --size=2G --bs=4k --rw=randr
 
 ---
 
-### 8.3 Docker Container Disk I/O Benchmark (Volume Mounted)
+### 7.3 Docker Container Disk I/O Benchmark (Volume Mounted)
 
 Docker storage was benchmarked by mounting the host directory into the container via `-v ~/fio-test:/fio-test`:
 
@@ -422,7 +352,7 @@ docker run --rm -v ~/fio-test:/fio-test vm-container-benchmark fio --name=rand-r
 
 ---
 
-## 9. Comprehensive Performance Comparison Table
+## 8. Comprehensive Performance Comparison Table
 
 | Category | Benchmark Metric | Virtual Machine (VMware) | Container (Docker) | Performance Difference (%) | Key Observation |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -440,9 +370,9 @@ $$\text{Performance Difference (\%)} = \left( \frac{\text{Docker Throughput} - \
 
 ---
 
-## 10. Visual Performance Graphs
+## 9. Visual Performance Graphs
 
-### 10.1 CPU Throughput Comparison (Events / Sec)
+### 9.1 CPU Throughput Comparison (Events / Sec)
 ```text
 VM Baseline     : [██████████████████████████████████████████████████] 3404 eps
 Docker Baseline : [██████████████████████████████████████████████████] 3401 eps
@@ -450,13 +380,13 @@ VM (10-Run Avg) : [████████████████████�
 Docker (10-Run) : [██████████████████████████████████████████████████] 3400 eps
 ```
 
-### 10.2 Memory Transfer Bandwidth (MiB/s)
+### 9.2 Memory Transfer Bandwidth (MiB/s)
 ```text
 Virtual Machine (VMware) : [██████████████████████████████████████████] 1920.40 MiB/s
 Docker Container (Ubuntu): [███████████████████████████████████████████] 1935.81 MiB/s (+0.80%)
 ```
 
-### 10.3 Storage I/O Throughput Comparison (FIO Direct I/O - MiB/s)
+### 9.3 Storage I/O Throughput Comparison (FIO Direct I/O - MiB/s)
 ```text
 Seq Read (VM)     : [██████████████████████████████████████████████████] 642.0 MiB/s
 Seq Read (Docker) : [██████████████████████████████████████████████████] 640.5 MiB/s
@@ -466,7 +396,7 @@ Seq Write (Docker): [███████████████████] 
 
 ---
 
-## 11. Key Findings & Conclusion
+## 10. Key Findings & Conclusion
 
 1. **CPU Computation**:
    * Hardware virtualization and containerization exhibit virtually identical raw CPU performance (< 0.1% delta). Modern hypervisor hardware extensions (Intel VT-x / AMD-V) eliminate CPU instruction emulation overhead, while Docker operates with zero CPU virtualization layer.
