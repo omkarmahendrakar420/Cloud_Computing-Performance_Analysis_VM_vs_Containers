@@ -72,6 +72,8 @@ graph TB
         GuestOS --> App1
     end
 
+    VM_Architecture --> Container_Architecture
+
     subgraph Container_Architecture["Container (Docker)"]
         Hardware2["Physical Host Hardware / VM Guest"]
         HostKernel["Ubuntu Host Kernel (Namespaces / cgroups)"]
