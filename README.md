@@ -481,8 +481,3 @@ Seq Write (Docker): [███████████████████] 
 4. **Summary Recommendation**:
    * **Containers (Docker)** are optimal for microservices, web APIs, fast scalability, and CI/CD pipelines requiring rapid startup, minimal memory footprint, and near-native performance.
    * **Virtual Machines (VMware)** remain necessary when strong hardware-level isolation, kernel customization, multi-OS tenancy (e.g. running Windows and Linux side-by-side), or dedicated kernel drivers are required.
-
----
-**Author**: Omkar S Mahendrakar  
-**Course**: Cloud Computing (5th Semester CS-AI)  
-**Environment**: VMware Workstation & Docker on Ubuntu 24.04.4 LTS
