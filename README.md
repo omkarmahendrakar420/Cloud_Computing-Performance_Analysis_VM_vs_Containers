@@ -70,8 +70,6 @@ graph TD
         HostKernel --> DockerDaemon["Docker Engine 29.1.3"]
         DockerDaemon --> ContainerApp["Containerized Benchmark Process"]
     end
-```
-
 ---
 
 ## 4. Prerequisites & Environment Setup
